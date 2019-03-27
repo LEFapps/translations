@@ -13,14 +13,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LEFapps/lef-translations.git"
+    "url": "git+https://github.com/LEFapps/translations.git"
   },
   "author": "LEF",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LEFapps/lef-translations/issues"
+    "url": "https://github.com/LEFapps/translations/issues"
   },
-  "homepage": "https://github.com/LEFapps/lef-translations",
+  "homepage": "https://github.com/LEFapps/translations",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.4.0",
