@@ -91,7 +91,8 @@ class Translator extends Component {
 Translator.propTypes = {
   settings: PropTypes.shape({
     languages: PropTypes.arrayOf(PropTypes.string).isRequired,
-    default: PropTypes.string.isRequired
+    default: PropTypes.string.isRequired,
+    titles: PropTypes.object.isRequired
   }),
   getTranslation: PropTypes.any.isRequired,
   setUserLanguage: PropTypes.func,
