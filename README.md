@@ -13,6 +13,10 @@ const props = {
   settings: {
     languages: ['nl', 'fr'],
     default: 'nl',
+    titles: {
+      nl: 'Nederlands',
+      fr: 'Français'
+    }
   },
   // * required
   getTranslation: ({ props: { _id, md, category, params }, args: { language, skipSettings }}) => {},
@@ -49,12 +53,12 @@ import { Translate } from '@lefapps/translations'
 
 ## Pick language menu
 
-This creates a bootstrap uncontrolled dropdown menu for use in a `nav` element.
+This creates a bootstrap uncontrolled dropdown menu for use in a `nav` element. Setting the `showTitle` prop to `true` will show full language names (set in the translator settings) instead of showing a flag icon and language abbreviations.
 
 ```JSX
 import { PickLanguage } from '@lefapps/translations'
 
-<PickLanguage />
+<PickLanguage showTitles />
 ```
 
 ## withTranslator
