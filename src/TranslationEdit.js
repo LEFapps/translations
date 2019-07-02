@@ -163,7 +163,7 @@ class TranslationModal extends Component {
                           value={translation[language]}
                           onChange={e => this.handleChange(e, language)}
                         />
-                        {translation.params ? (
+                        {translation.params && translation.params.length ? (
                           <InsertParams
                             params={translation.params}
                             insertParam={this.insertParam}
@@ -196,7 +196,7 @@ class TranslationModal extends Component {
                         value={translation[language] || ''}
                         onChange={e => this.handleChange(e, language)}
                       />
-                      {translation.params ? (
+                      {translation.params && translation.params.length ? (
                         <InsertParams
                           params={translation.params}
                           insertParam={this.insertParam}
