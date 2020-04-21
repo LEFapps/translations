@@ -143,7 +143,12 @@ class TranslationModal extends Component {
     const uploadProps = upload || {}
     if (!translation) return null
     return (
-      <Modal isOpen={open} toggle={toggle} size='lg'>
+      <Modal
+        isOpen={open}
+        toggle={toggle}
+        size='lg'
+        className={'admin-dashboard__style'}
+      >
         <ModalHeader toggle={toggle}>
           <FontAwesomeIcon icon={'edit'} /> {translation._id}
         </ModalHeader>
