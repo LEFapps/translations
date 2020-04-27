@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, useContext } from 'react'
 import PropTypes from 'prop-types'
 
 const TranslatorContext = React.createContext()
@@ -104,9 +104,10 @@ Translator.propTypes = {
 
 const withTranslator = Component => {
   return function TranslatorComponent (props) {
+    const translator = useContext(TranslatorContext)
     return (
       <TranslatorContext.Consumer>
-        {translator => <Component {...props} {...translator} />}
+        <Component {...props} {...translator} />
       </TranslatorContext.Consumer>
     )
   }
