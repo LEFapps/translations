@@ -51,18 +51,19 @@ class Translate extends Component {
     }
     return (
       <>
-        {this.state.editing ? (
+        {this.state.editing && (
           <TranslationEdit
             translation={this.props}
             upload={this.props.upload}
             toggle={this.toggleEditing}
             open={this.state.editing}
           />
-        ) : null}
+        )}
         <TagName
           className={'translation' + (className ? ' ' + className : '')}
           dangerouslySetInnerHTML={{ __html: text }}
           onDoubleClick={this.toggleEditing}
+          data-translation={this.props._id}
         />
       </>
     )
