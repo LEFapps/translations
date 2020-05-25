@@ -20,9 +20,10 @@ class Translator extends Component {
     language =
       getUserLanguage && getUserLanguage() ? getUserLanguage() : currentLanguage
     if (!language || !settings.languages.includes(language)) {
-      const navLang = (navigator.language || navigator.userLanguage).split(
-        '-'
-      )[0]
+      const navLang =
+        typeof navigator !== 'undefined'
+          ? (navigator.language || navigator.userLanguage).split('-')[0]
+          : settings && settings.default
       if (settings.languages.includes(navLang)) {
         language = navLang
       } else {
@@ -105,11 +106,7 @@ Translator.propTypes = {
 const withTranslator = Component => {
   return function TranslatorComponent (props) {
     const translator = useContext(TranslatorContext)
-    return (
-      <TranslatorContext.Consumer>
-        <Component {...props} {...translator} />
-      </TranslatorContext.Consumer>
-    )
+    return <Component {...props} {...translator} />
   }
 }
 
