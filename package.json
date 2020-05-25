@@ -1,6 +1,6 @@
 {
   "name": "@lefapps/translations",
-  "version": "3.1.4",
+  "version": "3.1.5",
   "description": "React package for translations and cms",
   "main": "./lib/index.js",
   "scripts": {
