@@ -50,7 +50,6 @@
     "markdown-it": "^8.4.2",
     "markdown-it-video": "^0.6.3",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
     "reactstrap": "^8.0.0"
   }
 }
