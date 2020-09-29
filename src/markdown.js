@@ -1,4 +1,5 @@
 import MarkdownIt from 'markdown-it'
+import mdAnchor from 'markdown-it-anchor'
 
 const markdown = MarkdownIt({
   html: true,
@@ -6,6 +7,6 @@ const markdown = MarkdownIt({
   typography: true
 })
   .use(require('markdown-it-video'))
-  .use(require('markdown-it-anchor'))
+  .use(mdAnchor)
 
 export default markdown
