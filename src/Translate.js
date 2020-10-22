@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import forEach from 'lodash/forEach'
+import has from 'lodash/has'
 import PropTypes from 'prop-types'
 
 import { withTranslator } from './Translator'
@@ -31,8 +32,10 @@ class Translate extends Component {
       className,
       autoHide,
       params,
+      onLoad = () => null,
       translator: { translations, currentLanguage }
     } = this.props
+    if (has(translations, _id)) onLoad(_id)
     if (!translations[_id]) return ''
     const translation = translations[_id][currentLanguage]
     if (autoHide && !translation) return null
@@ -79,7 +82,8 @@ TranslateContainer.propTypes = {
   preventInPageEdit: PropTypes.bool,
   autoHide: PropTypes.bool,
   params: PropTypes.object,
-  upload: PropTypes.object
+  upload: PropTypes.object,
+  onLoad: PropTypes.func
 }
 
 export default TranslateContainer

@@ -10,7 +10,7 @@ const markdown = MarkdownIt({
   .use(require('markdown-it-video'))
   .use(mdAnchor)
   .use(mdLinkAttrs, {
-    pattern: /^https?:.+/,
+    pattern: /https/,
     attrs: {
       target: '_blank',
       rel: 'noopener'
