@@ -1,15 +1,4 @@
-import { Translator, withTranslator } from './Translator'
-import Translate from './Translate'
-import TranslationEdit from './TranslationEdit'
-import PickLanguage from './PickLanguage'
-import MarkdownHelp from './MarkdownHelp'
+import * as setup from './setup'
+import * as Translate from './Translate'
 
-export default Translate
-export {
-  Translator,
-  withTranslator,
-  Translate,
-  TranslationEdit,
-  PickLanguage,
-  MarkdownHelp
-}
+export default { ...setup, ...Translate }
