@@ -2,7 +2,8 @@
   "name": "@lefapps/translations",
   "version": "3.1.9",
   "description": "React package for translations and cms",
-  "main": "./lib/index.js",
+  "browser": "./lib/index.js",
+  "main": "./lib/server/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint src",
@@ -38,7 +39,8 @@
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.1.1",
-    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-standard": "^4.0.0",
     "rimraf": "^2.6.3",
     "watch": "^1.0.2"
@@ -46,12 +48,13 @@
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "apollo-boost": "^0.4.9",
+    "apollo-server": "^2.21.2",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.3.0",
     "markdown-it-link-attributes": "^3.0.0",
     "markdown-it-video": "^0.6.3",
-    "prop-types": "^15.7.2",
-    "reactstrap": "^8.0.0"
+    "prop-types": "^15.7.2"
   }
 }

@@ -1,4 +1,14 @@
-import * as setup from './setup'
-import * as Translate from './Translate'
+import {
+  TranslatorContext,
+  useTranslator,
+  withTranslator,
+  Translator
+} from './setup'
+import { Translate } from './Translate'
+import { Editor } from './Edit'
+import * as queries from './queries'
 
-export default { ...setup, ...Translate }
+export { TranslatorContext, useTranslator, withTranslator, Translator }
+export { Translate, Editor }
+
+export { queries }
