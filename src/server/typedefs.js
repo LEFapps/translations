@@ -12,12 +12,15 @@ export default gql`
 
   extend type Query {
     translate(_id: String, language: String): Translation
+    translations: [Translation]
+  }
+
+  extend type Mutation {
     translated(
       _id: String
       translations: Translations
       md: Boolean
       params: [String]
     ): Translation
-    translations: [Translation]
   }
 `

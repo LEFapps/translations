@@ -1,16 +1,16 @@
 import { gql } from 'apollo-boost'
 
 export const TRANSLATION_GET = gql`
-  query getTranslation($key: String, $ln: String) {
-    translate(_id: $key, language: $ln) {
+  query getTranslation($_id: String, $ln: String) {
+    translate(_id: $_id, language: $ln) {
       _id
       translation
     }
   }
 `
 export const TRANSLATION_GET__ADMIN = gql`
-  query getTranslation($key: String) {
-    translate(_id: $key) {
+  query getTranslation($_id: String) {
+    translate(_id: $_id) {
       translations
       params
       md
@@ -27,12 +27,12 @@ export const TRANSLATION_LIST = gql`
   }
 `
 export const TRANSLATION_SET = gql`
-  query setTranslation(
-    $key: String
-    $translations: TranslationInput
+  mutation setTranslation(
+    $_id: String
+    $translations: Translations
     $md: Boolean
   ) {
-    translated(_id: $key, translations: $translations, md: $md) {
+    translated(_id: $_id, translations: $translations, md: $md) {
       _id
     }
   }

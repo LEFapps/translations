@@ -7,8 +7,9 @@ import {
   Button,
   Spinner
 } from 'reactstrap'
-import { useQuery, useLazyQuery } from '@apollo/react-hooks'
+import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import get from 'lodash/get'
 
 import { Form } from './helpers/Form'
 import { schema } from './helpers/schema'
@@ -19,25 +20,37 @@ import { render } from 'react-dom'
 
 export const Editor = ({ _id, toggle, isOpen, ...props }) => {
   const [isBusy, setBusy] = useState()
-  const [alert, setAlert] = useState()
+  const [alerts, setAlert] = useState()
   const { languages, ...context } = useContext(TranslatorContext)
   const { loading, error, data } = useQuery(TRANSLATION_GET__ADMIN, {
     variables: { _id }
   })
-  const [setTranslation, settledTranslation] = useLazyQuery(TRANSLATION_SET)
+  // const [
+  //   setTranslation,
+  //   { loading: loadingUpdate, error: errorUpdate, data: dataUpdate }
+  // ] = useLazyQuery(TRANSLATION_SET)
+  const [
+    setTranslation,
+    { loading: loadingUpdate, error: errorUpdate, data: dataUpdate }
+  ] = useMutation(TRANSLATION_SET)
 
   // save changes
   const updateTranslation = model => {
+    console.log('update', model, setTranslation)
     setBusy(true)
     setAlert()
-    setTranslation({ variables: { _id, ...model } })
-    const { loading, error, data } = settledTranslation
-    if (!loading) {
+    const r = setTranslation({ variables: { _id, ...model } })
+    console.log('SET', r, loadingUpdate, dataUpdate, errorUpdate)
+    if (!loadingUpdate) {
       setBusy(false)
-      if (error) return setAlert(error)
+      if (errorUpdate) return setAlert(errorUpdate)
       toggle()
     }
   }
+
+  // data
+  const translation =
+    (dataUpdate && dataUpdate.translate) || (data && data.translate)
 
   // render edit modal
   return (
@@ -50,11 +63,15 @@ export const Editor = ({ _id, toggle, isOpen, ...props }) => {
       <ModalHeader>{_id}</ModalHeader>
       <ModalBody>
         {loading && <Spinner size='lg' color='primary' />}
-        {data && !loading && (
+        {translation && !loading && (
           <Form
-            elements={schema({ languages, params: data.params, ...context })}
+            elements={schema({
+              languages,
+              params: translation.params,
+              ...context
+            })}
             onSubmit={updateTranslation}
-            initialModel={data}
+            initialModel={translation}
           >
             <Button
               type={'button'}
@@ -70,7 +87,7 @@ export const Editor = ({ _id, toggle, isOpen, ...props }) => {
           </Form>
         )}
       </ModalBody>
-      <ModalFooter className='text-danger'>{alert || ''}</ModalFooter>
+      <ModalFooter className='text-danger'>{alerts || ''}</ModalFooter>
     </Modal>
   )
 }
