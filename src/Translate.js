@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/react-hooks'
 
 import { TranslatorContext } from './setup'
 import { TRANSLATION_GET } from './queries'
+import { markdown } from './helpers/markdown'
 
 export const Translate = ({
   _id,
@@ -28,8 +29,8 @@ export const Translate = ({
 
   // data
   let { translation } = translate || {}
+  translation = translation || ''
   if (!translation && autoHide) props.hidden = true
-  console.log('<Trs/>', data)
 
   // params
   Object.keys(params).map(param => {
@@ -37,8 +38,7 @@ export const Translate = ({
     translation = translation.replace(pattern, params[param])
   })
 
-  // markdown
-  // if (md) translation = md(translation)
+  if (md) translation = markdown.render(translation)
 
   return (
     <Tag {...props} className={classes.join(' ')}>

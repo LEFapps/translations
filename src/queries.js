@@ -1,8 +1,8 @@
 import { gql } from 'apollo-boost'
 
 export const TRANSLATION_GET = gql`
-  query getTranslation($_id: String, $language: String) {
-    translate(_id: $_id, language: $language) {
+  query getTranslation($_id: String, $language: String, $params: [String]) {
+    translate(_id: $_id, language: $language, params: $params) {
       _id
       translation
     }
