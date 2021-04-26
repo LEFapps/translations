@@ -3,7 +3,6 @@
   "version": "3.1.9",
   "description": "React package for translations and cms",
   "browser": "./lib/index.js",
-  "main": "./lib/server/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint src",
@@ -49,7 +48,6 @@
     "@babel/polyfill": "^7.4.4",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "apollo-boost": "^0.4.9",
-    "apollo-server": "^2.21.2",
     "lodash": "^4.17.11",
     "markdown-it": "^8.4.2",
     "markdown-it-anchor": "^5.3.0",
