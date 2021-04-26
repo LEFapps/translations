@@ -19,9 +19,12 @@ export const withTranslator = WrappedComponent => {
   }
 }
 
-export const Translator = ({ children, ...props }) => {
+export const Translator = ({ children, setLanguageCallback, ...props }) => {
   const [context, setContext] = useState({ ...defaults, ...props })
-  const setLanguage = language => setContext({ ...context, language })
+  const setLanguage = language => {
+    setContext({ ...context, language })
+    setLanguageCallback && setLanguageCallback(language)
+  }
   return (
     <TranslatorContext.Provider value={{ ...context, setLanguage }}>
       {children}

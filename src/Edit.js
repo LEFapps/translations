@@ -36,11 +36,9 @@ export const Editor = ({ _id, toggle, isOpen, ...props }) => {
 
   // save changes
   const updateTranslation = model => {
-    console.log('update', model, setTranslation)
     setBusy(true)
     setAlert()
     const r = setTranslation({ variables: { _id, ...model } })
-    console.log('SET', r, loadingUpdate, dataUpdate, errorUpdate)
     if (!loadingUpdate) {
       setBusy(false)
       if (errorUpdate) return setAlert(errorUpdate)

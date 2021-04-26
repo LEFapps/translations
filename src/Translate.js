@@ -15,18 +15,21 @@ export const Translate = ({
   ...props
 }) => {
   const { language } = useContext(TranslatorContext)
-  const { loading, error, data } = useQuery(TRANSLATION_GET, {
+  const { loading, error, data = {} } = useQuery(TRANSLATION_GET, {
     variables: { _id, language }
   })
+
+  const { translate } = data
 
   const classes = [...className.split(' '), 'translation']
   if (loading) classes.push('translation__loading')
   if (md) classes.push('translation__md')
-  if (error || !data) classes.push('translation__error')
+  if (error || !translate) classes.push('translation__error')
 
   // data
-  let { translation } = data || {}
+  let { translation } = translate || {}
   if (!translation && autoHide) props.hidden = true
+  console.log('<Trs/>', data)
 
   // params
   Object.keys(params).map(param => {

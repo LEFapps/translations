@@ -18,11 +18,7 @@ export const Picker = ({ showTitle, children }) => {
   return (
     <UncontrolledDropdown nav inNavbar>
       <DropdownToggle nav caret>
-        {showTitle ? (
-          <Translate _id={`translator/${language}`}>{language}</Translate>
-        ) : (
-          <FontAwesomeIcon icon='flag' />
-        )}
+        {showTitle ? language : <FontAwesomeIcon icon='flag' />}
       </DropdownToggle>
       <DropdownMenu right>
         {languages.map(lang => {
