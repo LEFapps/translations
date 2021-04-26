@@ -19,34 +19,12 @@ export const withTranslator = WrappedComponent => {
   }
 }
 
-// export const Translator = ({ children, ...props }) => {
-//   // const [context, setContext] = useState({ ...defaults, ...props })
-//   // const setLanguage = language => setContext({ ...context, language })
-//   const context = { ...defaults, ...props }
-//   const setLanguage = language => (context.language = language)
-//   return (
-//     <TranslatorContext.Provider value={{ ...context, setLanguage }}>
-//       {children}
-//     </TranslatorContext.Provider>
-//   )
-// }
-
-class Translator extends Component {
-  constructor (props) {
-    super(props)
-    this.state = defaults
-  }
-  render () {
-    const setLanguage = language => this.setState({ language })
-    const { children, ...props } = this.props
-    return (
-      <TranslatorContext.Provider
-        value={{ ...this.state, ...props, setLanguage }}
-      >
-        {children}
-      </TranslatorContext.Provider>
-    )
-  }
+export const Translator = ({ children, ...props }) => {
+  const [context, setContext] = useState({ ...defaults, ...props })
+  const setLanguage = language => setContext({ ...context, language })
+  return (
+    <TranslatorContext.Provider value={{ ...context, setLanguage }}>
+      {children}
+    </TranslatorContext.Provider>
+  )
 }
-
-export { Translator }

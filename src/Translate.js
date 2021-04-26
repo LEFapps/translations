@@ -11,6 +11,7 @@ export const Translate = ({
   className = '',
   params = {},
   autoHide,
+  children,
   ...props
 }) => {
   const { language } = useContext(TranslatorContext)
@@ -24,7 +25,7 @@ export const Translate = ({
   if (error || !data) classes.push('translation__error')
 
   // data
-  let { translation } = data
+  let { translation } = data || {}
   if (!translation && autoHide) props.hidden = true
 
   // params
@@ -38,7 +39,7 @@ export const Translate = ({
 
   return (
     <Tag {...props} className={classes.join(' ')}>
-      {translation}
+      {translation || children || ''}
     </Tag>
   )
 }
