@@ -1,7 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import stubFalse from 'lodash/stubFalse'
+import isFunction from 'lodash/isFunction'
 
-import { TranslatorContext } from './setup'
+import { Editor } from './Edit'
+import { useTranslator } from './setup'
 import { TRANSLATION_GET } from './queries'
 import { markdown } from './helpers/markdown'
 
@@ -13,15 +16,20 @@ export const Translate = ({
   params = {},
   autoHide,
   children,
+  language,
   ...props
 }) => {
-  const { language } = useContext(TranslatorContext)
+  const { language: defaultLanguage, canEdit = stubFalse } = useTranslator()
+  language = language || defaultLanguage
   const { loading, error, data = {} } = useQuery(TRANSLATION_GET, {
     variables: { _id, language }
   })
+  const [isEditing, setEditing] = useState()
+  const toggleEditing = () => setEditing(!isEditing)
 
   const { translate } = data
 
+  const editable = isFunction(canEdit) && canEdit()
   const classes = [...className.split(' '), 'translation']
   if (loading) classes.push('translation__loading')
   if (md) classes.push('translation__md')
@@ -38,11 +46,19 @@ export const Translate = ({
     translation = translation.replace(pattern, params[param])
   })
 
+  // render
   if (md) translation = markdown.render(translation)
 
   return (
-    <Tag {...props} className={classes.join(' ')}>
+    <Tag
+      {...props}
+      className={classes.join(' ')}
+      onDoubleClick={() => editable && toggleEditing()}
+    >
       {translation || children || ''}
+      {editable && (
+        <Editor _id={_id} isOpen={isEditing} toggle={toggleEditing} />
+      )}
     </Tag>
   )
 }

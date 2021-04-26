@@ -30,7 +30,9 @@ export const Picker = ({ showTitle, children }) => {
               disabled={lang === language}
               onClick={() => setLanguage(lang)}
             >
-              <Translate _id={`translator/${lang}`}>{lang}</Translate>
+              <Translate _id={`translator/${lang}`} language={lang}>
+                {lang}
+              </Translate>
             </DropdownItem>
           )
         })}
