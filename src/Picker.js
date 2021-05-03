@@ -5,7 +5,6 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Translate } from './Translate'
 import { useTranslator } from './setup'
@@ -16,9 +15,10 @@ export const Picker = ({ showTitle, children }) => {
   if (languages.length < 2) return null
 
   return (
-    <UncontrolledDropdown nav inNavbar>
+    <UncontrolledDropdown id='language-picker' nav inNavbar>
       <DropdownToggle nav caret>
-        {showTitle ? language : <FontAwesomeIcon icon='flag' />}
+        {showTitle && language}
+        {children}
       </DropdownToggle>
       <DropdownMenu right>
         {languages.map(lang => {

@@ -54,6 +54,7 @@ export const Translate = ({
     <Tag
       {...props}
       className={classes.join(' ')}
+      data-translation={_id}
       onDoubleClick={() => editable && toggleEditing()}
     >
       {translation || children || ''}
