@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { Helmet } from 'react-helmet'
 import stubFalse from 'lodash/stubFalse'

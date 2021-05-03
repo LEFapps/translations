@@ -5,6 +5,7 @@ const prepend = '{{'
 const append = '}}'
 
 export const schema = ({ languages, params = [], toolbarImage }) => {
+  /* eslint-disable indent */
   const toolbarParams = params &&
     !!params.length && {
       icon: 'puzzle-piece',

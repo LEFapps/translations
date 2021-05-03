@@ -7,28 +7,21 @@ import {
   Button,
   Spinner
 } from 'reactstrap'
-import { useQuery, useLazyQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import get from 'lodash/get'
 
 import { Form } from './helpers/Form'
 import { schema } from './helpers/schema'
 import { TranslatorContext } from './setup'
 import { TRANSLATION_GET__ADMIN, TRANSLATION_SET } from './queries'
-import Component from './helpers/Upload'
-import { render } from 'react-dom'
 
 export const Editor = ({ _id, toggle, isOpen, ...props }) => {
   const [isBusy, setBusy] = useState()
   const [alerts, setAlert] = useState()
   const { languages, ...context } = useContext(TranslatorContext)
-  const { loading, error, data } = useQuery(TRANSLATION_GET__ADMIN, {
+  const { loading, data } = useQuery(TRANSLATION_GET__ADMIN, {
     variables: { _id }
   })
-  // const [
-  //   setTranslation,
-  //   { loading: loadingUpdate, error: errorUpdate, data: dataUpdate }
-  // ] = useLazyQuery(TRANSLATION_SET)
   const [
     setTranslation,
     { loading: loadingUpdate, error: errorUpdate, data: dataUpdate }
@@ -38,7 +31,7 @@ export const Editor = ({ _id, toggle, isOpen, ...props }) => {
   const updateTranslation = model => {
     setBusy(true)
     setAlert()
-    const r = setTranslation({ variables: { _id, ...model } })
+    setTranslation({ variables: { _id, ...model } })
     if (!loadingUpdate) {
       setBusy(false)
       if (errorUpdate) return setAlert(errorUpdate)
