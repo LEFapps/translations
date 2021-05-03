@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { useQuery } from '@apollo/react-hooks'
+import { Helmet } from 'react-helmet'
 import stubFalse from 'lodash/stubFalse'
 import isFunction from 'lodash/isFunction'
 
@@ -59,6 +60,13 @@ export const Translate = ({
       {editable && (
         <Editor _id={_id} isOpen={isEditing} toggle={toggleEditing} />
       )}
+      <Helmet>
+        <style>
+          {
+            "@keyframes translator__loading{0%{left:-1em}80%{left:100%}}.translator-preview img{max-width:100%}.translation.translation__loading{position:relative;width:100%;max-width:5em;display:inline-block;color:transparent;background-color:hsla(0,0%,50%,0.1);white-space:nowrap;}.translation.translation__laoding.translation__md{width:100%;display:block;}.translation.translation__loading::after{content:'';position:absolute;left:-1em;top:0;bottom:0;width:1em;background-image:linear-gradient(to right,hsla(0,0%,50%,0),hsla(0,0%,50%,0.2),hsla(0,0%,50%,0));animation:translator__loading 1s linear 0s infinite forwards;}"
+          }
+        </style>
+      </Helmet>
     </Tag>
   )
 }
