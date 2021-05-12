@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { Helmet } from 'react-helmet'
+import ReactHtmlParser from 'react-html-parser'
 import stubFalse from 'lodash/stubFalse'
 import isFunction from 'lodash/isFunction'
 
@@ -8,6 +9,7 @@ import { Editor } from './Edit'
 import { useTranslator } from './setup'
 import { TRANSLATION_GET } from './queries'
 import { markdown } from './helpers/markdown'
+import { isArray } from 'lodash'
 
 export const useRawTranslation = _id => {
   const { language } = useTranslator()
@@ -57,7 +59,8 @@ export const Translate = ({
   })
 
   // render
-  if (md) translation = markdown.render(translation)
+  if (md) translation = ReactHtmlParser(markdown.render(translation))
+  if (isArray(translation) && !translation.length) translation = ''
 
   return (
     <Tag
