@@ -19,8 +19,8 @@ import { Translator } from '@lefapps/translations'
 #### Define a translator configuration:
 
 ```JSX
-const langauges = ['nl', 'fr', 'en'] // you are free to decide how they look
-const defaultLanguage = langauges[0]
+const languages = ['nl', 'fr', 'en'] // you are free to decide how they look
+const defaultLanguage = languages[0]
 const translatorConfig = {
   languages,
   language:
@@ -55,6 +55,17 @@ const Content = page => {
 }
 ```
 
+#### Access the raw translation string:
+
+```JSX
+import { useRawTranslation } from '@lefapps/translations'
+
+const Logo = ({ src }) => {
+  const { translation } = useRawTranslation('menu/logo/alt')
+  return <h1><img src={src} alt={translation} /></h1>
+}
+```
+
 #### Include the languageSwitcher:
 
 ```JSX
@@ -79,16 +90,16 @@ Use the `Translate` component to fetch translations using a specific identifier.
 
 ### Props
 
-| Prop      | Type                | Required? | Default   | Description                                                   |
-| --------- | ------------------- | --------- | --------- | ------------------------------------------------------------- |
-| \_id      | String              | ✓         | ""        | Identifier of the translation (see [guidelines](#guidelines)) |
-| md        | Bool                |           | false     | Formated using MarkDown (using the markdown-it plugin)        |
-| tag       | String<br>Component |           | span      | HTML tag to wrap the translation                              |
-| className | String              |           | ""        | Optional classnames for                                       |
-| params    | Object              |           | {}        | Replace text: `{{key}}` gets replaced by its `value`          |
-| autoHide  | Bool                |           | false     | Hide the component when the translation is empty              |
-| children  | String<br>Nodes     |           | null      | Initial value while loading                                   |
-| language  | String              |           | [current] | Force a different language to be loaded                       |
+| Prop      | Type                | Required? | Default   | Description                                                           |
+| --------- | ------------------- | --------- | --------- | --------------------------------------------------------------------- |
+| \_id      | String              | ✓         | ""        | Identifier of the translation (see [guidelines](#guidelines))         |
+| md        | Bool                |           | false     | Formatted using MarkDown (html rendered using the markdown-it plugin) |
+| tag       | String<br>Component |           | span      | HTML tag to wrap the translation                                      |
+| className | String              |           | ""        | Optional classnames for                                               |
+| params    | Object              |           | {}        | Replace text: `{{key}}` gets replaced by its `value`                  |
+| autoHide  | Bool                |           | false     | Hide the component when the translation is empty                      |
+| children  | String<br>Nodes     |           | null      | Initial value while loading                                           |
+| language  | String              |           | [current] | Force a different language to be loaded                               |
 
 #### Guidelines
 
@@ -118,6 +129,30 @@ The following HTML attributes are automatically applied on the element:
 ```
 
 \*The component is automatically subtly styled while loading.
+
+## useRawTranslation
+
+Use the `useRawTranslation` hook to fetch translations as a string instead of React Component.
+
+#### Notes
+
+1. To keep your code organised, only use `useRawTranslation` when necessary<br/>(e.g. for `alt` or `title` attributes — these do not accept React Components).
+1. The returned translation is the raw string. If the value contains MarkDown, you should take care of encoding it in your app.
+
+### Arguments
+
+Accepts one argument, the identifier: `useRawTranslation(_id)`.
+
+### Returns
+
+| Key         | Type   | Description                                                     |
+| ----------- | ------ | --------------------------------------------------------------- |
+| loading     | Bool   | True while the translation is being fetched                     |
+| error       | Object | Populated with Apollo Error if something goes wrong             |
+| translation | String | Translation for the identifier in the currently active language |
+| \_id        | String | Identifier of the translation                                   |
+| md          | Bool   | Whether the returned string contains MarkDown                   |
+| params      | Array  | Available keys                                                  |
 
 ## PickLanguage
 

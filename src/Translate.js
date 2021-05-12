@@ -9,6 +9,15 @@ import { useTranslator } from './setup'
 import { TRANSLATION_GET } from './queries'
 import { markdown } from './helpers/markdown'
 
+export const useRawTranslation = _id => {
+  const { language } = useTranslator()
+  const { loading, error, data = {} } = useQuery(TRANSLATION_GET, {
+    variables: { _id, language }
+  })
+  const { translation = '' } = data.translate || {}
+  return { loading, error, ...data.translate, translation }
+}
+
 export const Translate = ({
   _id,
   md,
