@@ -2,7 +2,7 @@
   "name": "@lefapps/translations",
   "version": "4.0.1",
   "description": "React package for translations and cms",
-  "browser": "./lib/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint src",

@@ -98,6 +98,8 @@ Use the `Translate` component to fetch translations using a specific identifier.
 | className | String              |           | ""        | Optional classnames for                                               |
 | params    | Object              |           | {}        | Replace text: `{{key}}` gets replaced by its `value`                  |
 | autoHide  | Bool                |           | false     | Hide the component when the translation is empty                      |
+| onInit    | Func                |           | null      | Callback when the component is initialised (before loading)           |
+| onLoad    | Func                |           | null      | Callback when the translation data is finished loading                |
 | children  | String<br>Nodes     |           | null      | Initial value while loading                                           |
 | language  | String              |           | [current] | Force a different language to be loaded                               |
 

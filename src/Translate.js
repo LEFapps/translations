@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useQuery } from '@apollo/react-hooks'
 import { Helmet } from 'react-helmet'
 import ReactHtmlParser from 'react-html-parser'
@@ -29,8 +29,13 @@ export const Translate = ({
   autoHide,
   children,
   language,
+  onInit,
+  onLoad,
   ...props
 }) => {
+  useEffect(() => {
+    onInit(_id)
+  }, [_id, onInit])
   const { language: defaultLanguage, canEdit = stubFalse } = useTranslator()
   language = language || defaultLanguage
   const { loading, error, data = {} } = useQuery(TRANSLATION_GET, {
@@ -49,6 +54,7 @@ export const Translate = ({
 
   // data
   let { translation } = translate || {}
+  onLoad && onLoad(_id)
   translation = translation || ''
   if (!translation && autoHide) props.hidden = true
 
