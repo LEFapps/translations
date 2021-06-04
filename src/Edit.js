@@ -7,7 +7,7 @@ import {
   Button,
   Spinner
 } from 'reactstrap'
-import { useQuery, useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/client'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { Form } from './helpers/Form'

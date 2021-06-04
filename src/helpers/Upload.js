@@ -1,11 +1,15 @@
 import React from 'react'
 import { Button, ButtonGroup, Input } from 'reactstrap'
-import { translatorText } from '@lefapps/forms'
 import ImgUpload, { Preview } from '@lefapps/uploader'
 import get from 'lodash/get'
 import cloneDeep from 'lodash/cloneDeep'
 import castArray from 'lodash/castArray'
 
+let translatorText, form
+try {
+  form = require('@lefapps/forms')
+} catch (e) {}
+if (form) translatorText = form.translatorText
 const defaultHost = `${window.location.protocol}//${window.location.hostname}/`
 
 const Component = props => {

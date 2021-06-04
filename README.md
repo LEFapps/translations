@@ -241,7 +241,7 @@ Otherwise you can build your own backend list to edit each translation. An examp
 
 ```JSX
 import React, { useState } from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { queries, Editor } from '@lefapps/translations'
 
 const Translation = ({ _id }) => {
